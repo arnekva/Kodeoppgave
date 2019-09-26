@@ -1,0 +1,100 @@
+
+
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Rendering Chart from External JSON File using AJAX - CanvasJS JavaScript Charts</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="googlebot" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <script
+    type="text/javascript"
+    src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="/css/result-light.css">
+
+      <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+  <style id="compiled-css" type="text/css">
+
+  </style>
+
+
+  <!-- TODO: Missing CoffeeScript 2 -->
+
+  <script type="text/javascript">//<![CDATA[
+
+    window.onload=function(){
+
+$(document).ready(function() {
+  var dataPointsA = []
+  var dataPointsB = []
+
+  $.ajax({
+    type: 'GET',
+    url: 'https://api.myjson.com/bins/bujip',
+    dataType: 'json',
+    success: function(field) {
+      for (var i = 0; i < field.length; i++) {
+      var date = new Date(field[i].dato)
+        dataPointsA.push({
+          x: i,
+          y: field[i].restgjeld
+        });
+        dataPointsB.push({
+          x: field[i].time,
+          y: field[i].yyy
+        });
+      }
+      document.getElementById('antaar').innerHTML ="Det vil ta " + field.length + " måneder. (" + field.length/12 + " år) å betale ned lånet."
+
+      var chart = new CanvasJS.Chart("chartContainer", {
+        title: {
+          text: "Restbeløp over tid"
+        },
+
+        data: [{
+          type: "line",
+          name: "line1",
+          dataPoints: dataPointsA
+        }, {
+          type: "line",
+          name: "line2",
+          dataPoints: dataPointsB
+        }, ]
+      });
+
+      chart.render();
+
+    }
+  });
+})
+
+    }
+
+  //]]></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+    <br><br>
+<div id="chartContainer" style="height: 360px; width: 100%;"></div>
+
+<h2 id="antaar"></h2>
+
+  <script>
+    // tell the embed parent frame the height of the content
+    if (window.parent && window.parent.parent){
+      window.parent.parent.postMessage(["resultsFrame", {
+        height: document.body.getBoundingClientRect().height,
+        slug: "ydojgkc6"
+      }], "*")
+    }
+
+    // always overwrite window.name, in case users try to set it manually
+    window.name = "result"
+  </script>
+</body>
+</html>
