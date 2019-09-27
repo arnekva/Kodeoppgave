@@ -3,19 +3,11 @@
 <html>
 <head>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  <title>Rendering Chart from External JSON File using AJAX - CanvasJS JavaScript Charts</title>
+  <title>Kodeoppgave</title>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <meta name="robots" content="noindex, nofollow">
   <meta name="googlebot" content="noindex, nofollow">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
-
-  <script
-    type="text/javascript"
-    src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.js"></script>
-
-    <link rel="stylesheet" type="text/css" href="/css/result-light.css">
-
       <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
   <style id="compiled-css" type="text/css">
@@ -23,66 +15,183 @@
   </style>
 
 
-  <!-- TODO: Missing CoffeeScript 2 -->
 
-  <script type="text/javascript">//<![CDATA[
 
-    window.onload=function(){
-
-$(document).ready(function() {
-  var dataPointsA = []
-  var dataPointsB = []
-
-  $.ajax({
-    type: 'GET',
-    url: 'https://api.myjson.com/bins/bujip',
-    dataType: 'json',
-    success: function(field) {
-      for (var i = 0; i < field.length; i++) {
-      var date = new Date(field[i].dato)
-        dataPointsA.push({
-          x: i,
-          y: field[i].restgjeld
-        });
-        dataPointsB.push({
-          x: field[i].time,
-          y: field[i].yyy
-        });
-      }
-      document.getElementById('antaar').innerHTML ="Det vil ta " + field.length + " måneder. (" + field.length/12 + " år) å betale ned lånet."
-
-      var chart = new CanvasJS.Chart("chartContainer", {
-        title: {
-          text: "Restbeløp over tid"
-        },
-
-        data: [{
-          type: "line",
-          name: "line1",
-          dataPoints: dataPointsA
-        }, {
-          type: "line",
-          name: "line2",
-          dataPoints: dataPointsB
-        }, ]
-      });
-
-      chart.render();
-
-    }
-  });
-})
-
-    }
-
-  //]]></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<style>
+body{
+  margin: 0 auto;
+  margin-top:0 !important;
+}
+* {
+  box-sizing: border-box;
+}
+.main-container{
+  margin:0 auto;
+}
+.form-menu{
+  margin-top:20px;
+  margin-left:auto;
+  margin-right:auto;
+  background-color: #ffe2d9;
+  padding:20px;
+}
+.form{
+  margin
+}
+input[type=text], select, textarea {
+  width: 30%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+input[type=submit] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: left;
+}
+.input-stacc{
+  width: 130px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: white;
+  background-image: url('searchicon.png');
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  padding: 12px 20px 12px 40px;
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
+}
+.input-stacc:focus{
+   background-color: lightblue;
+   width:50%;
+}
+
+label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+}
+
+
+.container-fluid {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+
+.col-25 {
+  float: left;
+  width: 25%;
+  margin-top: 6px;
+}
+
+.col-75 {
+  float: left;
+  width: 75%;
+  margin-top: 6px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.daterange{
+  width:200px;
+}
+
+</style>
 </head>
 <body>
-    <br><br>
-<div id="chartContainer" style="height: 360px; width: 100%;"></div>
+  <div class="main-container">
 
+
+<div id="chartContainer" style="height: 360px; width: 100%;">
+<h1>Velkommen til lånekalkulatoren. Implementert gjennom Stacc sin API</h1>
+</div>
+
+<div class="bootstrap-iso">
+<div class="container-fluid">
+<div class="row">
+<div class="col-md-6 col-sm-6 col-xs-12">
+
+<!-- Form code begins -->
+<form class="staccskjema" onsubmit="return false">
+  <div class="form-group"> <!-- Date input -->
+    <div class="row">
+      <div class="col-25">
+      <label for="belop">Beløp: </label>
+    </div>
+    <div class="col-75">
+<input class="input-stacc" type="text" id="belop" name="formdata" placeholder="Beløp å låne"/>
+</div>
+
+    </div>
+
+    <div class="row">
+      <div class="col-25">
+      <label for="date">Utbetalingsdato: </label>
+    </div>
+    <div class="col-75">
+    <input class="form-control input-stacc utbetalingsdato" id="utbetalingdate" name="date" placeholder="Ferdigbetalt til" type="text"/>
+    </div>
+
+    </div>
+    <div class="row">
+      <div class="col-25">
+      <label for="date">Ferdig betalt innen: </label>
+    </div>
+    <div class="col-75">
+    <input class="form-control input-stacc innbetalingsdato" id="date" name="date" placeholder="Ferdigbetalt til" type="text"/>
+    </div>
+
+    </div>
+    <div class="row">
+      <div class="col-25">
+      <label for="date">Prøv å gå opp eller ned noen år:</label>
+    </div>
+    <div class="col-75">
+    <input class="daterange" id="daterange" name="date"  type="range" min="-5" max="5" default="0" />
+    </div>
+
+    </div>
+    <div class="row">
+      <div class="col-25">
+      <label for="date">Første nedbetalingsmåned: </label>
+    </div>
+    <div class="col-75">
+    <input class="form-control input-stacc forstebetaling" id="forstebetalingdate" name="date" placeholder="Ferdigbetalt til" type="text"/>
+    </div>
+
+    </div>
+
+
+
+
+
+  </div>
+  <input type="hidden" id="dateForRange"value=""/>
+  <div class="form-group"> <!-- Submit button -->
+
+    <input type="submit" name="submit" value="Submit1"/>
+  </div>
+ </form>
+ <!-- Form code ends -->
+
+</div>
+</div>
+</div>
+</div>
 <h2 id="antaar"></h2>
+<h2 id="averagepayment"></h2>
 
   <script>
     // tell the embed parent frame the height of the content
@@ -92,9 +201,62 @@ $(document).ready(function() {
         slug: "ydojgkc6"
       }], "*")
     }
-
+document.title = "Kodeoppgave"
     // always overwrite window.name, in case users try to set it manually
-    window.name = "result"
+
   </script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+<script>
+    $(document).ready(function(){
+      var date_input=$('input[name="date"]'); //our date input has the name "date"
+      var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+      var options={
+        format: 'yyyy-mm-dd',
+        container: container,
+        todayHighlight: true,
+        autoclose: true,
+      };
+      date_input.datepicker(options);
+      $('.utbetalingsdato').datepicker();
+
+      //Setter default utbetalingsdato til 3 måneder fra i dag.
+      var today = new Date();
+      today.setMonth(today.getMonth()+3)
+      let paymentdatestring = formatDate(today)
+      $('.utbetalingsdato').datepicker("setDate", paymentdatestring);
+
+
+
+      $('.innbetalingsdato').datepicker();
+      $('.innbetalingsdato').datepicker("setDate", "2030-01-01");
+      $('.innbetalingsdato').datepicker();
+
+      //Setter første betalingsmåned default til 1 måned etter utbetalingsmåned
+      let paymentDue = new Date(document.getElementById('utbetalingdate').value)
+      paymentDue.setMonth(paymentDue.getMonth()+1)
+      let datestring = formatDate(paymentDue)
+
+      $('.forstebetaling').datepicker("setDate", datestring);
+    });
+
+    //Formaterer JS sin date til YYYY-mm-dd streng
+    function formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2)
+        month = '0' + month;
+    if (day.length < 2)
+        day = '0' + day;
+
+    return [year, month, day].join('-');
+}
+
+</script>
+<script src="js/ajaxHandler.js"></script>
+</div>
 </body>
 </html>
