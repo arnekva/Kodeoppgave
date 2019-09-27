@@ -107,7 +107,19 @@ label {
 .daterange{
   width:200px;
 }
-
+.maintitle{
+  padding-top:50px;
+  text-align: center;
+}
+.smooth{
+  opacity:0.5;
+  -webkit-transition: opacity 600ms, visibility 600ms;
+  transition: opacity 600ms, visibility 600ms;
+}
+.smooth:hover{
+  visibility: visible;
+  opacity: 1;
+}
 </style>
 </head>
 <body>
@@ -115,7 +127,9 @@ label {
 
 
 <div id="chartContainer" style="height: 360px; width: 100%;">
-<h1>Velkommen til lånekalkulatoren. Implementert gjennom Stacc sin API</h1>
+<h1 class="maintitle">Velkommen til lånekalkulatoren. Implementert gjennom Stacc sin API</h1>
+<h2 class="maintitle">Min løsning på oppgaven: Implementere en visualisering på nedbetalings-API</h2>
+<h3 class="maintitle">Fyll inn skjemaet under for lånet du ønsker å ta</h3>
 </div>
 
 <div class="bootstrap-iso">
@@ -138,7 +152,7 @@ label {
 
     <div class="row">
       <div class="col-25">
-      <label for="date">Utbetalingsdato: </label>
+      <label for="utbetalingdate">Utbetalingsdato: </label>
     </div>
     <div class="col-75">
     <input class="form-control input-stacc utbetalingsdato" id="utbetalingdate" name="date" placeholder="Ferdigbetalt til" type="text"/>
@@ -151,27 +165,22 @@ label {
     </div>
     <div class="col-75">
     <input class="form-control input-stacc innbetalingsdato" id="date" name="date" placeholder="Ferdigbetalt til" type="text"/>
-    </div>
+      </div>
 
     </div>
-    <div class="row">
-      <div class="col-25">
-      <label for="date">Prøv å gå opp eller ned noen år:</label>
-    </div>
-    <div class="col-75">
-    <input class="daterange" id="daterange" name="date"  type="range" min="-5" max="5" default="0" />
-    </div>
+    <span class="smooth" id="range-span" style="display:none;" ><input class="daterange" id="daterange"   type="range" min="-5" max="5" default="0" /><label for="date" id="rangetext">Prøv å gå opp eller ned noen år</label></span>
 
-    </div>
     <div class="row">
       <div class="col-25">
-      <label for="date">Første nedbetalingsmåned: </label>
+      <label for="forstebetalingdate">Første nedbetalingsmåned: </label>
     </div>
     <div class="col-75">
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
     <input class="form-control input-stacc forstebetaling" id="forstebetalingdate" name="date" placeholder="Ferdigbetalt til" type="text"/>
     </div>
 
     </div>
+
 
 
 

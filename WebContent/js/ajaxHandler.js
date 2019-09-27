@@ -53,18 +53,24 @@ let averagepayment = 0;
 
 
 $(document).ready(function(){ // USE $
+let notpressed = true;
 
   $('.daterange').on('change', function () {
     let daterange = document.getElementById('daterange').value
     let dato = document.getElementById('date').value
-    console.log(daterange)
+
 
       postTilStacc()
   });
   $('.staccskjema').on('submit', function () {
       rangeSaveToHidden();
       postTilStacc()
+      notpressed = false;
+      let x =
+      document.getElementById('range-span').style.display ='inline'
+      document.getElementById('range-span').classList.add('smoother')
       return false;
+
   });
 });
 function rangeSaveToHidden(){
@@ -77,7 +83,14 @@ function dateRangeNearest(daterangevalue, dato){
   let savedDate = new Date(dato)
   savedDate.setYear(savedDate.getFullYear()+(daterangevalue-0))
   let datestring = formatDate(savedDate)
-  console.log(datestring)
+  console.log(daterangevalue)
+  if(daterangevalue !== "0"){
+    document.getElementById('rangetext').innerHTML = savedDate.getFullYear()
+  } else if (daterangevalue === "0"){
+    console.log("fooo")
+    document.getElementById('rangetext').innerHTML = "Dra slideren for å endre fullføringsår"
+  }
+
   return datestring
 }
 function postTilStacc(){
@@ -86,12 +99,12 @@ function postTilStacc(){
   let rangevalue = document.getElementById('daterange').value
   let dato = document.getElementById('date').value
   let hiddenDate = document.getElementById('dateForRange').value
-  if(rangevalue !== "5"){
-  dato = dateRangeNearest(rangevalue, hiddenDate)
-$('.innbetalingsdato').datepicker("setDate", dato);
-  }
+    dato = dateRangeNearest(rangevalue, hiddenDate)
+    $('.innbetalingsdato').datepicker("setDate", dato);
+
 
   let utbetalingsdato = document.getElementById('utbetalingdate').value
+  let forstebetaling = document.getElementById('forstebetalingdate').value
 
   let belopint = belop -0
   let payload =   {
@@ -100,10 +113,9 @@ $('.innbetalingsdato').datepicker("setDate", dato);
     "terminGebyr": 30,
     "utlopsDato":dato,
     "saldoDato":utbetalingsdato,
-    "datoForsteInnbetaling":"2020-02-01",
+    "datoForsteInnbetaling":forstebetaling,
     "ukjentVerdi":"TERMINBELOP"
   }
-  console.log(payload)
 
 
 $.ajax({
@@ -114,7 +126,7 @@ $.ajax({
               traditional: true,
               success: function(data) {
                 tegnPunkter(data.nedbetalingsplan.innbetalinger)
-                console.log(data.nedbetalingsplan.innbetalinger)
+
               }});
 
 }}
