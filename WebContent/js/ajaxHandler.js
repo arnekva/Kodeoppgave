@@ -1,29 +1,24 @@
 
   window.onload=function(){
-class ajaxBody{
-
-  constructor(){
-
-  }
 
 
-}
-
+let myChart;
 
 function plotGraf(json){
-  console.log(json[0])
 
-  console.log(json[0].innbetaling)
   var labels = []
   var data = []
-  let averagepayment = 0;
+  let averagepayment = 0
+  let averagerenter = 0
   for(let i = 0; i<json.length;i++){
     averagepayment += json[i].innbetaling -0
+    averagerenter += json[i].renter -0
     labels[i] = json[i].dato
     data[i] = json[i].restgjeld
   }
 
   var ctx = canvas.getContext('2d');
+
   var config = {
      type: 'line',
      data: {
@@ -38,66 +33,40 @@ function plotGraf(json){
   };
   let average = (averagepayment/json.length).toFixed(2)
   let lengde = json.length
-  printFaktaTilHTML(average, lengde)
-  var chart = new Chart(ctx, config);
+  let renter = (averagerenter/json.length).toFixed(2)
+  printFaktaTilHTML(average, lengde, renter)
+  myChart = new Chart(ctx, config);
+
 }
 
-function printFaktaTilHTML(average, lengde){
+//For å unngå memory leaks og at grafene plottes oppå hverandre, må den gamle fjernes.
+function destroyChart(){
+  if(myChart){
+  myChart.destroy()
+  console.log("chart destroyed")
+}else{
+  console.log("no chart found")
+}
+}
 
-  document.getElementById('averagepayment').innerHTML = "Du vil i gjennomsnitt betale " + average + " kroner per måned."
+function printFaktaTilHTML(average, lengde, renter){
   document.getElementById('antaar').innerHTML ="Lånet vil gå over " + (lengde/12).toFixed(2) + " år (" + lengde + " måneder)."
+  if(lengde>0){
+  document.getElementById('averagepayment').innerHTML = "Du vil i gjennomsnitt betale " + average + " kroner per måned."
+  document.getElementById('rentepm').innerHTML ="Av " + average + " i måneden er går gjennomsnittlig " + renter + " til renter."
   let mndlonn = document.getElementById('mndlonn').value
   let pengerAlevePa = (mndlonn - average).toFixed(2)
-  console.log(mndlonn)
-  console.log("wtf")
   if(pengerAlevePa < 8000 && mndlonn-0 !== 0){
     document.getElementById('warningtext').innerHTML = "Månedspriser er sannsynligvis for høy for din inntekt og vil gi deg " + pengerAlevePa + " å bruke i måneden. Forsøk å sette datoen litt lenger bak"
   }else{
     document.getElementById('warningtext').innerHTML = ""
   }
-
-}
-function tegnPunkter(jsonresult) {
-var dataPointsA = []
-var dataPointsB = []
-let averagepayment = 0;
-
-    for (var i = 0; i < jsonresult.length; i++) {
-
-      averagepayment += jsonresult[i].innbetaling -0
-    var date = new Date(jsonresult[i].dato)
-      dataPointsA.push({
-        x: i/12,
-        y: jsonresult[i].restgjeld
-      });
-      /* dataPointsB.push({
-        x: field[i].time,
-        y: field[i].yyy
-      }); */
-    }
-    document.getElementById('averagepayment').innerHTML = "Du vil i gjennomsnitt betale " + (averagepayment/jsonresult.length).toFixed(2) + " kroner per måned."
-    document.getElementById('antaar').innerHTML ="Lånet vil gå over " + (jsonresult.length/12).toFixed(2) + " år (" + jsonresult.length + " måneder)."
-
-    var chart = new CanvasJS.Chart("chartContainer", {
-      title: {
-        text: ""
-      },
-
-      data: [{
-        type: "line",
-        name: "line1",
-        dataPoints: dataPointsA
-      }, /*{
-        type: "line",
-        name: "line2",
-        dataPoints: dataPointsB
-      }, */ ]
-    });
-
-    chart.render();
-    document.title = "Kodeoppgave"
+} else{
+  document.getElementById('averagepayment').innerHTML = "Tidsrommet er ikke gyldig"
+  document.getElementById('rentepm').innerHTML = "Tidsrommet er ikke gyldig"
 }
 
+}
 
 $(document).ready(function(){ // USE $
 let notpressed = true
@@ -106,17 +75,19 @@ let notpressed = true
     let daterange = document.getElementById('daterange').value
     let dato = document.getElementById('date').value
 
-
+destroyChart()
       postTilStacc()
   });
   $('.staccskjema').on('submit', function () {
+      destroyChart()
       rangeSaveToHidden();
       postTilStacc()
       notpressed = false;
       let x =
-      document.getElementById('range-span').style.display ='inline'
+      document.getElementById('faktaboks-container').style.display ='inline'
+      document.getElementById('faktaboks-right').style.display ='inline-block'
       document.getElementById('range-span').classList.add('smoother')
-      document.getElementById('faktaboks-right').style.display='inline'
+
       return false;
 
   });
@@ -184,3 +155,51 @@ $.ajax({
               }});
 
 }}
+
+
+
+
+
+//Gamle graf-printer
+/*
+function tegnPunkter(jsonresult) {
+var dataPointsA = []
+var dataPointsB = []
+let averagepayment = 0;
+
+    for (var i = 0; i < jsonresult.length; i++) {
+
+      averagepayment += jsonresult[i].innbetaling -0
+    var date = new Date(jsonresult[i].dato)
+      dataPointsA.push({
+        x: i/12,
+        y: jsonresult[i].restgjeld
+      });
+      dataPointsB.push({
+        x: field[i].time,
+        y: field[i].yyy
+      });
+    }
+    document.getElementById('averagepayment').innerHTML = "Du vil i gjennomsnitt betale " + (averagepayment/jsonresult.length).toFixed(2) + " kroner per måned."
+    document.getElementById('antaar').innerHTML ="Lånet vil gå over " + (jsonresult.length/12).toFixed(2) + " år (" + jsonresult.length + " måneder)."
+
+    var chart = new CanvasJS.Chart("chartContainer", {
+      title: {
+        text: ""
+      },
+
+      data: [{
+        type: "line",
+        name: "line1",
+        dataPoints: dataPointsA
+      }, {
+        type: "line",
+        name: "line2",
+        dataPoints: dataPointsB
+      },  ]
+    });
+
+    chart.render();
+    document.title = "Kodeoppgave"
+}
+*/

@@ -25,6 +25,9 @@ input[type=text], select, textarea {
   border-radius: 4px;
   resize: vertical;
 }
+input[type=text]:disabled {
+  background-color: #dedede;
+}
 input[type=submit] {
   background-color: #4CAF50;
   color: white;
@@ -115,20 +118,7 @@ label {
   margin-right:-400px !important;
   float:left;
 }
-.faktaboks{
-  margin-top:25px;
-  margin-left:50px;
-  width:50%;
-  float:left;
-  position:relative;
-}
-.faktaboks-right{
-  margin-top:25px;
-  margin-left:50px;
-  width:30%;
-  float:right;
-  background-color:#97cacf;
-}
+
 .right-list{
   padding:20px;
 }
@@ -141,7 +131,7 @@ font-size:1.9rem;
   color: rgba(191, 52, 10, 0.95);
 }
 #faktaboks-right{
-  display:none;
+
 }
 .canvas-container{
   width:45%;
@@ -154,4 +144,33 @@ font-size:1.9rem;
 }
 .warningtext2{
 color:  #f0a946
+}
+.faktaboks-container{
+  vertical-align: middle;
+  height:auto;;
+  position:relative;
+  display:none;
+}
+.faktaheader{
+  color: #de3700;
+  font-size:2.0rem;
+  font-family: "Helvetica", sans-serif;
+}
+.faktaboks{
+  margin-top:25px;
+  margin-left:50px;
+  width:50%;
+  float:left;
+  position:relative;
+
+}
+.faktaboks-right{
+  margin-top:100px;
+  width:45%;
+
+}
+.lanheader{
+  font-size: 2.4rem;
+  color:#964400;
+  font-family: "Helvetica", sans-serif;
 }

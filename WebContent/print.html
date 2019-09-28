@@ -73,7 +73,22 @@
     <input class="form-control input-stacc forstebetaling" id="forstebetalingdate" name="date" placeholder="Ferdigbetalt til" type="text"/>
     </div>
     </div>
-
+    <div class="row">
+      <div class="col-25">
+      <label for="Nominellrente">Nominellrente: </label>
+    </div>
+    <div class="col-75">
+    <input class="form-control input-stacc innbetalingsdato" id="Nominellrente" name="Nominellrente" value="3" type="text" disabled/>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+      <label for="Termingebyr">Termingebyr: </label>
+    </div>
+    <div class="col-75">
+    <input class="form-control input-stacc innbetalingsdato" id="Termingebyr" name="Termingebyr" value="30" type="text" disabled/>
+      </div>
+    </div>
     <div class="row">
       <div class="col-25">
       <label for="belop">Månedslønn brutto (frivillig): </label>
@@ -98,23 +113,24 @@
 </div>
 </div>
 </div>
-<div class="faktaboks">
-<p class="faktatekst" id="antaar"></p>
-<p class="faktatekst" id="averagepayment"></p>
-<p class="faktatekst warningtext" id="warningtext"></p>
-<span class="smooth" id="range-span" style="display:none;" ><input class="daterange" id="daterange"   type="range" min="-10" max="10" default="0" /><p class="rangetext" id="rangetext">Dra slideren for å gå opp eller ned noen år</p></span>
-</div>
-<div id="faktaboks-right" class="faktaboks-right">
-  <div class=" right-list">
-  <h4>Generell info om lånet:</h4>
-<ul class="fb-right">
+<div id="faktaboks-container"class="faktaboks-container">
 
-  <li>Nomiellrente: 3</li>
-  <li>Nomiellrente: 3</li>
-  <li>Nomiellrente: 3</li>
-</ul>
+<div class="faktaboks" id="faktaboks">
+  <h2 class="lanheader">Fakta om lånet!</h2>
+  <h3 class="faktaheader">Antall år:</h3>
+<p class="faktatekst" id="antaar"></p>
+  <h3 class="faktaheader">Per måned</h3>
+<p class="faktatekst" id="averagepayment"></p>
+<h3 class="faktaheader">Renter per måned:</h3>
+<p class="faktatekst" id="rentepm"></p>
+<p class="faktatekst warningtext" id="warningtext"></p>
+</div>
+<div class="faktaboks-right" id="faktaboks-right">
+  <span class="smooth" id="range-span"><input class="daterange" id="daterange"   type="range" min="-10" max="10" default="0" /><p class="rangetext" id="rangetext">Dra slideren for å gå opp eller ned noen år</p></span>
+
 </div>
 </div>
+
 <a class="top-link hide" href="" id="js-top">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6"><path d="M12 6H0l6-6z"/></svg>
 </a>
