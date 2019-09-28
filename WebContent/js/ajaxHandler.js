@@ -105,7 +105,7 @@ function dateRangeNearest(daterangevalue, dato){
   let datestring = formatDate(savedDate)
   console.log(daterangevalue)
   if(daterangevalue !== "0"){
-    document.getElementById('rangetext').innerHTML = savedDate.getFullYear()
+    document.getElementById('rangetext').innerHTML = "Nedbetalt i: "+savedDate.getFullYear()
   } else if (daterangevalue === "0"){
     console.log("fooo")
     if(ikkeslidet){
