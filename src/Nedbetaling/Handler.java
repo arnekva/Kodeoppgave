@@ -1,16 +1,13 @@
 package Nedbetaling;
 
 import java.io.BufferedInputStream;
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
 import org.apache.cxf.helpers.IOUtils;
-import org.json.JSONObject;
 
 public class Handler {
 
@@ -45,6 +42,8 @@ public class Handler {
         InputStream in = new BufferedInputStream(conn.getInputStream());
         String result = IOUtils.toString(in, "UTF-8");
         System.out.println(result);
+        NedbetalingWebService test = new NedbetalingWebService();
+        test.getGjennomsnitt(result);
 //        System.out.println("result after Reading JSON Response");
 //        JSONObject myResponse = new JSONObject(result);
 //        System.out.println("jsonrpc- "+myResponse.getString("jsonrpc"));
