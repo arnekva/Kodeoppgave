@@ -42,6 +42,8 @@ public class Handler {
         InputStream in = new BufferedInputStream(conn.getInputStream());
         String result = IOUtils.toString(in, "UTF-8");
         System.out.println(result);
+        
+       
         NedbetalingWebService test = new NedbetalingWebService();
         test.getGjennomsnitt(result);
 //        System.out.println("result after Reading JSON Response");

@@ -134,7 +134,7 @@
       <label for="belop">Månedslønn brutto (frivillig): </label>
     </div>
     <div class="col-75">
-    <input class="input-stacc" type="text" id="mndlonn" name="formdata" placeholder="25000"/>
+    <span><input class="input-stacc" type="text" id="mndlonn" name="formdata" placeholder="25000"/><input type="submit" name="submit" value="Beregn"/></span>
     </div>
 
     </div>
@@ -146,7 +146,7 @@
   </div>
   <input type="hidden" id="dateForRange"value=""/>
   <div class="form-group">
-    <input type="submit" name="submit" value="Submit1"/>
+
   </div>
 
  </form>
@@ -201,15 +201,7 @@
 </a>
 
   <script>
-    // tell the embed parent frame the height of the content
-    if (window.parent && window.parent.parent){
-      window.parent.parent.postMessage(["resultsFrame", {
-        height: document.body.getBoundingClientRect().height,
-        slug: "ydojgkc6"
-      }], "*")
-    }
 document.title = "Kodeoppgave"
-    // always overwrite window.name, in case users try to set it manually
 
   </script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
@@ -220,5 +212,6 @@ document.title = "Kodeoppgave"
 <script src="js/ajaxHandler.js"></script>
 <script src="js/topscroll.js"></script>
 </div>
+
 </body>
 </html>
