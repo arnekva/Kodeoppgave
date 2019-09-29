@@ -1,9 +1,18 @@
-# Kodeoppgave
+# Nedbetalingsplan
 
-## Fintech
+Jeg har laget en nettside i HTML og JS for å visualisere en nedbetalingsplan for lån. Nettsiden tar i bruk Stacc's nedbetalings-API.
 
-#### Nedbetaling
+## Bruk
 
-Visualisere nedbetalingen av et lån fra en JSON-struktur fra en GET til Stacc's API. 
+Fyll inn skjemaet med informasjonen om lånet ditt, så vil du få oppgitt en graf som viser nedbetalingen over årene samt noen nøkkeltall om planen.
 
-Kjør index.html for å starte
+## Kjøring
+
+Kjør index.html for å nå nettsiden. Nettsiden krever mappene css/ og js/ for å kjøre. 
+
+Du kan også besøke nettsiden på https://arnekvaleberg.com/nedbetalingsplan
+
+## Annet
+
+
+
