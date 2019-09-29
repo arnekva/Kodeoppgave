@@ -6,15 +6,15 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class ResponseGetNedbetaling extends ServerResponse {
-    private List<Steg> nedbetalingsplan;
+    private int average;
 	
     public ResponseGetNedbetaling(){}
 
-    public List<Steg> getTasks() {
-        return nedbetalingsplan;
+    public int getAvg() {
+        return average;
     }
 
-    public void setTasks(List<Steg> plan) {
-        this.nedbetalingsplan = plan;
+    public void setAvg(int avg) {
+        this.average = avg;
     }
 }

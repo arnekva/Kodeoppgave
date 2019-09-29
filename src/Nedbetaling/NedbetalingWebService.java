@@ -28,7 +28,7 @@ public class NedbetalingWebService {
     	int avg = 0;
         if (!json.equals("")) {
            JSONObject obj = new JSONObject(json);
-           
+           int dato1 = Integer.parseInt(obj.getJSONObject("nedbetalingsplan").getJSONArray("innbetalinger").getJSONObject(obj.getJSONObject("nedbetalingsplan").getJSONArray("innbetalinger").length()-1).getString("dato").substring(0,4));
            for(int i = 0;i<obj.getJSONObject("nedbetalingsplan").getJSONArray("innbetalinger").length(); i++) {
         	  JSONObject object = obj.getJSONObject("nedbetalingsplan").getJSONArray("innbetalinger").getJSONObject(i);
         	  
@@ -36,12 +36,13 @@ public class NedbetalingWebService {
            
            String dato = object.getString("dato");
            double innbetaling = object.getDouble(("innbetaling"));
-           int dato1 = Integer.parseInt(dato.substring(0, 4));
-   
-            avg += innbetaling/((2045-2019)*12);
+           
+  
+            avg += innbetaling/((dato1-2019)*12);
            }
-           System.out.println("Gjennomsnittsprisen per måned er: " + avg);
+           System.out.println("Gjennomsnittsprisen per måned får lånet er: " + avg);
         }
+        response.setAvg(avg);
         return response;
     }
 
