@@ -81,6 +81,7 @@ $(document).ready(function() {
         document.getElementById('faktaboks-right').style.display = 'inline-block'
         document.getElementById('range-span').classList.add('smoother')
         document.getElementById('row-hidden').style.display = "inline"
+        document.getElementById('gjem-meg').style.display = "none"
       return false;
     });
 });
@@ -151,47 +152,3 @@ function postTilStacc() {
         }
     });
 }
-
-//Gamle graf-printer
-/*
-function tegnPunkter(jsonresult) {
-var dataPointsA = []
-var dataPointsB = []
-let averagepayment = 0;
-
-    for (var i = 0; i < jsonresult.length; i++) {
-
-      averagepayment += jsonresult[i].innbetaling -0
-    var date = new Date(jsonresult[i].dato)
-      dataPointsA.push({
-        x: i/12,
-        y: jsonresult[i].restgjeld
-      });
-      dataPointsB.push({
-        x: field[i].time,
-        y: field[i].yyy
-      });
-    }
-    document.getElementById('averagepayment').innerHTML = "Du vil i gjennomsnitt betale " + (averagepayment/jsonresult.length).toFixed(2) + " kroner per måned."
-    document.getElementById('antaar').innerHTML ="Lånet vil gå over " + (jsonresult.length/12).toFixed(2) + " år (" + jsonresult.length + " måneder)."
-
-    var chart = new CanvasJS.Chart("chartContainer", {
-      title: {
-        text: ""
-      },
-
-      data: [{
-        type: "line",
-        name: "line1",
-        dataPoints: dataPointsA
-      }, {
-        type: "line",
-        name: "line2",
-        dataPoints: dataPointsB
-      },  ]
-    });
-
-    chart.render();
-    document.title = "Kodeoppgave"
-}
-*/

@@ -55,15 +55,13 @@ input[type=submit] {
 }
 .input-stacc:focus{
    background-color: lightblue;
-   width:80%;
+   width:75%;
 }
 
 label {
   padding: 12px 12px 12px 0;
   display: inline-block;
 }
-
-
 
 .container-fluid {
   border-radius: 5px;
@@ -104,8 +102,10 @@ label {
 
 }
 .maintitle{
-  padding-top:50px;
+  padding-top:30px;
   text-align: center;
+  color:white;
+  margin-bottom:20px;
 }
 .smooth{
   opacity:0.75;
@@ -136,10 +136,7 @@ font-size:1.1rem;
 #faktaboks-right{
 
 }
-.maintitle{
-  color:white;
-  margin-bottom:20px;
-}
+
 
 .canvas-container{
   width:45%;
@@ -189,10 +186,9 @@ color:  #f0a946
   background-color: #b5d3ff;
   float:left;
   width:250px;
-  margin-top:30px;
+  margin-top:20px;
   margin-left:100px;
   margin-right:100px;
-  margin-top:50px !important;
   border-radius:10px;
   padding:10px;
   font-size:0.8rem;
