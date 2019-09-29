@@ -10,7 +10,7 @@ Fyll inn skjemaet med informasjonen om lånet ditt, så vil du få oppgitt en gr
 
 Kjør index.html for å nå nettsiden. Nettsiden krever mappene css/ og js/ for å kjøre. 
 
-Du kan også besøke nettsiden på https://arnekvaleberg.com/nedbetalingsplan
+Du kan også besøke nettsiden på https://arnekvaleberg.com/nedbetalingsplan/index
 
 ## Annet
 
