@@ -7,6 +7,8 @@ body{
 }
 .main-container{
   margin:0 auto;
+  height: 100vh;
+    background: linear-gradient(to bottom, rgba(92, 77, 66, 0.8) 0%, rgba(0, 110, 189, 0.8) 100%), url("../img/bg-container.jpg");
 }
 .form-menu{
   margin-top:20px;
@@ -19,7 +21,7 @@ body{
   margin
 }
 input[type=text], select, textarea {
-  width: 30%;
+  width: 70%;
   padding: 12px;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -52,7 +54,7 @@ input[type=submit] {
 }
 .input-stacc:focus{
    background-color: lightblue;
-   width:35%;
+   width:80%;
 }
 
 label {
@@ -76,7 +78,7 @@ label {
 
 .col-75 {
   float: left;
-  width: 75%;
+  width: 45%;
   margin-top: 6px;
 }
 .col-25-rev {
@@ -87,7 +89,7 @@ label {
 
 .col-75-rev {
   float: right;
-  width: 75%;
+  width: 45%;
   margin-top: 6px;
 }
 
@@ -98,7 +100,7 @@ label {
   clear: both;
 }
 .daterange{
-  width:200px;
+
 }
 .maintitle{
   padding-top:50px;
@@ -123,16 +125,21 @@ label {
   padding:20px;
 }
 .faktatekst{
-font-size:1.9rem;
+font-size:1.1rem;
 }
 .rangetext{
-  font-size:2.2rem;
-  text-align: center;
+  font-size:1.0rem;
   color: rgba(191, 52, 10, 0.95);
+
 }
 #faktaboks-right{
 
 }
+.maintitle{
+  color:white;
+  margin-bottom:20px;
+}
+
 .canvas-container{
   width:45%;
   height:50%;
@@ -140,7 +147,7 @@ font-size:1.9rem;
 }
 .warningtext{
   color:#f54e42;
-  font-size:1.5rem;
+  font-size:1.1rem;
 }
 .warningtext2{
 color:  #f0a946
@@ -153,7 +160,7 @@ color:  #f0a946
 }
 .faktaheader{
   color: #de3700;
-  font-size:2.0rem;
+  font-size:1.2rem;
   font-family: "Helvetica", sans-serif;
 }
 .faktaboks{
@@ -162,15 +169,73 @@ color:  #f0a946
   width:50%;
   float:left;
   position:relative;
+  text-align: right;
 
 }
 .faktaboks-right{
   margin-top:100px;
-  width:45%;
+  width:25%;
+  float:left;
 
+}
+.slider-container{
+  width:300px;
+  height:auto;
+  float:right;
+  margin-left:-300px !important;
+}
+.column{
+  background-color: #b5d3ff;
+  float:left;
+  width:250px;
+  margin-left:300px;
+  margin-top:50px;
+  border-radius:10px;
+  padding:10px;
+  font-size:0.8rem;
+}
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
 }
 .lanheader{
   font-size: 2.4rem;
   color:#964400;
   font-family: "Helvetica", sans-serif;
+}
+@media only screen and (max-width: 900px) {
+  .staccskjema{
+    width:100%;
+  }
+  .col-25{
+    width:30%;
+  }
+  input[type=text], select, textarea {
+    width: 80%;
+    margin-left:50%;
+  }
+  input[type=range] {
+    margin-left:90%;
+  }
+  .input-stacc:focus{
+     background-color: lightblue;
+     width:100%;
+  }
+  .canvas-container{
+    position:relative;
+    float:right;
+    display:none;
+  }
+  .lanheader{
+    font-size:1.7em;
+  }
+  .faktaheader{
+    font-size:1.3em;
+  }
+  .faktatekst{
+    font-size:1.1em;
+  }
+  .column{
+    margin-left:20px;
+  }
 }

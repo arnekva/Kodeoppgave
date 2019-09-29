@@ -13,8 +13,14 @@
   <meta name="author" content="Arne Kvaleberg" />
   <meta http-equiv="cache-control" content="no-cache"/>
       <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+      <!-- Google Fonts -->
+      <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet">
+      <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic' rel='stylesheet' type='text/css'>
+
   <style id="compiled-css" type="text/css">
   </style>
+  <link href="css/index.css" rel="stylesheet">
   <link rel="apple-touch-icon" sizes="57x57" href="img/apple-icon-57x57.png">
   <link rel="apple-touch-icon" sizes="60x60" href="img/apple-icon-60x60.png">
   <link rel="apple-touch-icon" sizes="72x72" href="img/apple-icon-72x72.png">
@@ -35,19 +41,24 @@
 <link rel="stylesheet" type="text/css" href="css/main.css">
 <link rel="stylesheet" type="text/css" href="css/range.css">
 <link rel="stylesheet" type="text/css" href="css/scroll.css">
-<link rel="stylesheet" type="text/css" href="scss/print.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <style>
 
 </style>
 </head>
 <body>
-  <div class="main-container">
+  <header class="masthead">
+    <div class="title-container">
+      <h1 class="welcome-title">Kodeoppgave</h1>
+      <h2 class="subtitle">Lånekalkulator</h2>
+    </div>
+  </header>
+  <div class="main-container" id="scrollhere">
 
 
 <div id="chartContainer">
 <h1 class="maintitle">Velkommen til lånekalkulatoren. Implementert gjennom Stacc sin API</h1>
-<h3 class="maintitle">Fyll inn skjemaet under for lånet du ønsker å ta</h3>
+<!-- <h3 class="maintitle">Fyll inn skjemaet under for lånet du ønsker å ta</h3> -->
 </div>
 
 <div class="bootstrap-iso">
@@ -84,6 +95,15 @@
     <input class="form-control input-stacc innbetalingsdato" id="date" name="date" placeholder="Ferdigbetalt til" type="text"/>
       </div>
     </div>
+    <div class="row" id="row-hidden">
+      <div class="col-25">
+      <label for="belop">Endre år:</label>
+    </div>
+    <div class="col-75">
+    <span class="smooth" id="range-span"><input class="daterange" id="daterange"   type="range" min="-10" max="10" default="0" /><p class="rangetext" id="rangetext">Dra slideren for å gå opp eller ned noen år</p></span>
+    </div>
+
+    </div>
     <div class="row">
       <div class="col-25">
       <label for="forstebetalingdate">Første nedbetalingsmåned: </label>
@@ -119,36 +139,61 @@
 
     </div>
 
+    <div class="slider-container" id="faktaboks-right">
+
+    </div>
 
   </div>
   <input type="hidden" id="dateForRange"value=""/>
-  <div class="form-group"> <!-- Submit button -->
+  <div class="form-group">
     <input type="submit" name="submit" value="Submit1"/>
   </div>
+
  </form>
  <div class="canvas-container">
    <canvas id="canvas"></canvas>
    </div>
+
 </div>
 </div>
 </div>
 </div>
 <div id="faktaboks-container"class="faktaboks-container">
 
-<div class="faktaboks" id="faktaboks">
-  <h2 class="lanheader">Fakta om lånet!</h2>
-  <h3 class="faktaheader">Antall år:</h3>
+<!-- <div><h2 class="lanheader">Fakta om lånet</h2></div> -->
+  <div class="flex-container">
+
+  <div><div class="column">
+  <h3 class="faktaheader">År</h3>
 <p class="faktatekst" id="antaar"></p>
+</div></div>
+  <div><div class="column">
   <h3 class="faktaheader">Per måned</h3>
 <p class="faktatekst" id="averagepayment"></p>
-<h3 class="faktaheader">Renter per måned:</h3>
+</div></div>
+  <div><div class="column">
+  <h3 class="faktaheader">Renter</h3>
 <p class="faktatekst" id="rentepm"></p>
 <p class="faktatekst warningtext" id="warningtext"></p>
+</div></div>
 </div>
-<div class="faktaboks-right" id="faktaboks-right">
-  <span class="smooth" id="range-span"><input class="daterange" id="daterange"   type="range" min="-10" max="10" default="0" /><p class="rangetext" id="rangetext">Dra slideren for å gå opp eller ned noen år</p></span>
+
+<!--
+<div class="faktaboks" id="faktaboks">
+  <h2 class="lanheader">Fakta om lånet</h2>
+
+<div class="column">
+  <h3 class="faktaheader">Per måned</h3>
+<p class="faktatekst" id="averagepayment"></p>
+</div>
+<div class="column">
+<h3 class="faktaheader">Renter per måned:</h3>
+<p class="faktatekst" id="rentepm"></p>
+</div>
 
 </div>
+-->
+
 </div>
 
 <a class="top-link hide" href="" id="js-top">

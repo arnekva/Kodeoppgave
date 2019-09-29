@@ -31,6 +31,7 @@ function plotGraf(json){
         }]
      }
   };
+
   let average = (averagepayment/json.length).toFixed(2)
   let lengde = json.length
   let renter = (averagerenter/json.length).toFixed(2)
@@ -50,28 +51,34 @@ function destroyChart(){
 }
 
 function printFaktaTilHTML(average, lengde, renter){
-  document.getElementById('antaar').innerHTML ="Lånet vil gå over " + (lengde/12).toFixed(2) + " år (" + lengde + " måneder)."
+  document.getElementById('antaar').innerHTML ="Lånet vil gå over <span style='color:#991c00'>" + (lengde/12).toFixed(2) + "</span> år (<span style='color:#991c00'>" + lengde + "</span> måneder)."
   if(lengde>0){
-  document.getElementById('averagepayment').innerHTML = "Du vil i gjennomsnitt betale " + average + " kroner per måned."
-  document.getElementById('rentepm').innerHTML ="Av " + average + " i måneden er går gjennomsnittlig " + renter + " til renter."
+  document.getElementById('averagepayment').innerHTML = "Du vil i gjennomsnitt betale <span style='color:#991c00'>" + average + "</span> kroner per måned."
+  document.getElementById('rentepm').innerHTML ="Av <span style='color:#991c00'>" + average + "</span> kroner i måneden er går gjennomsnittlig <span style='color:#991c00'>" + renter + "</span> kroner til renter."
   let mndlonn = document.getElementById('mndlonn').value
   let pengerAlevePa = (mndlonn - average).toFixed(2)
   if(pengerAlevePa < 8000 && mndlonn-0 !== 0){
-    document.getElementById('warningtext').innerHTML = "Månedspriser er sannsynligvis for høy for din inntekt og vil gi deg " + pengerAlevePa + " å bruke i måneden. Forsøk å sette datoen litt lenger bak"
+    document.getElementById('warningtext').innerHTML = "Månedspriser er sannsynligvis for høy for din inntekt og vil gi deg <span style='color:#991c00'>" + pengerAlevePa + "</span> å bruke i måneden. Forsøk å sette datoen litt lenger bak"
   }else{
     document.getElementById('warningtext').innerHTML = ""
   }
 } else{
+
   document.getElementById('averagepayment').innerHTML = "Tidsrommet er ikke gyldig"
   document.getElementById('rentepm').innerHTML = "Tidsrommet er ikke gyldig"
 }
 
 }
 
+function printError(){
+  document.getElementById('antaar').innerHTML = "Serveren godkjente ikke forespørselen din. Vennligst prøv på ny!"
+
+}
+
 $(document).ready(function(){ // USE $
 let notpressed = true
 
-  $('.daterange').on('change', function () {
+  /$('.daterange').on('change', function () {
     let daterange = document.getElementById('daterange').value
     let dato = document.getElementById('date').value
 
@@ -87,6 +94,7 @@ destroyChart()
       document.getElementById('faktaboks-container').style.display ='inline'
       document.getElementById('faktaboks-right').style.display ='inline-block'
       document.getElementById('range-span').classList.add('smoother')
+      document.getElementById('row-hidden').style.display = "inline"
 
       return false;
 
@@ -104,18 +112,13 @@ function dateRangeNearest(daterangevalue, dato){
   savedDate.setYear(savedDate.getFullYear()+(daterangevalue-0))
   let datestring = formatDate(savedDate)
   console.log(daterangevalue)
-  if(daterangevalue !== "0"){
+  if(daterangevalue !== "0" || !ikkeslidet){
     document.getElementById('rangetext').innerHTML = "Nedbetalt i: "+savedDate.getFullYear()
-  } else if (daterangevalue === "0"){
-    console.log("fooo")
-    if(ikkeslidet){
-    document.getElementById('rangetext').innerHTML = "Dra slideren for å gå opp eller ned noen år"
-    ikkeslidet = false;
   } else{
-    document.getElementById('rangetext').innerHTML = "Velg ny dato i skjemaet og trykk 'Submit' for å endre strekningen av årstall"
+    document.getElementById('rangetext').innerHTML = "Dra slideren for å gå opp eller ned noen år"
+      ikkeslidet = false;
+      console.log(ikkeslidet)
   }
-  }
-
   return datestring
 }
 function postTilStacc(){
@@ -152,7 +155,11 @@ $.ajax({
               success: function(data) {
                 plotGraf(data.nedbetalingsplan.innbetalinger)
 
-              }});
+              },
+              error: function(data){
+                printError()
+              }
+            });
 
 }}
 
