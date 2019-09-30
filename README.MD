@@ -12,7 +12,5 @@ Kjør index.html for å nå nettsiden. Nettsiden krever mappene css/ og js/ for 
 
 Du kan også besøke nettsiden på https://arnekvaleberg.com/nedbetalingsplan/index
 
-## Annet
 
-I mappen java-project ligger starten på en java-backend for å behandle API-calls. Denne er veldig uferdig, og er mer et proof-of-concept
 
